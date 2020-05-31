@@ -15,7 +15,7 @@ namespace DatingApp.API
             var host = CreateHostBuilder(args).Build();
             using (var scope = host.Services.CreateScope())
             {
-                var services =scope.ServiceProvider;
+                var services = scope.ServiceProvider;
                 try
                 {
                     var context = services.GetRequiredService<DataContext>();
@@ -28,6 +28,8 @@ namespace DatingApp.API
                     logger.LogError(ex, "An error ocurred during migration");
                 }
             }
+
+            host.Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
