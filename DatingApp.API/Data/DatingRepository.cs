@@ -23,6 +23,13 @@ namespace DatingApp.API.Data
             _context.Remove(entity);
         }
 
+        public async Task<Photo> GetPhoto(int id)
+        {
+            var Photo = await _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+
+            return Photo;
+        }
+
         public async Task<User> GetUser( int id)
         {
             var user = await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(u => u.Id == id);
@@ -35,7 +42,7 @@ namespace DatingApp.API.Data
             return user;
         }
 
-        public async Task<bool> Savell()
+        public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
         }
